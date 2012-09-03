@@ -14,7 +14,10 @@ if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist upload')
     sys.exit()
 
-requires = []
+requirements = [
+        'flask>=0.9',
+        'redis'
+        ]
 
 setup(
     name='basic_oauth',
@@ -31,7 +34,7 @@ setup(
     package_data={'': ['LICENSE']},
     package_dir={'basic_oauth': 'basic_oauth'},
     include_package_data=True,
-    install_requires=requires,
+    install_requires=requirements,
     license=open('LICENSE').read(),
     classifiers=(
         'Intended Audience :: Developers',
