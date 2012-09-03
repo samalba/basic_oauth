@@ -44,6 +44,12 @@ result in destroying the session.
 How to use it?
 --------------
 
+Install basic_oauth from PYPI:
+
+    pip install basic_oauth
+
+Create a sample WSGI app with [Flask](http://flask.pocoo.org/):
+
       import flask
       import basic_oauth
       
