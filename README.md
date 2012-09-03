@@ -47,7 +47,6 @@ How to use it?
       import flask
       import basic_oauth
       
-      
       app = flask.Flask(__name__)
       
       oauth = basic_oauth.BasicOauth(app)
@@ -59,7 +58,6 @@ How to use it?
       @oauth.require
       def hello():
           return 'Hello World!'
-      
       
       if __name__ == '__main__':
           app.debug = True
