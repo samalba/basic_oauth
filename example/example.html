@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Testing basic_oauth</title>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
+        <script type="text/javascript" src="/js/oauth_client.js"></script>
+    </head>
+
+    <body>
+        <h1>Test basic_oauth</h1>
+        <a href="/">Protected URL</a>
+        <form action="/login" class="oauth">
+            <input type="text" name="username" placeholder="Username" value="" />
+            <input type="password" name="password" placeholder="Password" value="" />
+            <button type="submit">Login</button>
+        </form>
+        <script type="text/javascript">
+            window.oauthResponseHandler = function (response) {
+                $('div#oauthResponse').text(JSON.stringify(response));
+            };
+        </script>
+        <div id="oauthResponse"></div>
+    </body>
+</html>
