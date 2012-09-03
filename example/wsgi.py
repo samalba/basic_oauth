@@ -6,6 +6,7 @@ import basic_oauth
 
 
 app = flask.Flask(__name__)
+
 oauth = basic_oauth.BasicOauth(app)
 oauth.mount_endpoint('login', '/login')
 oauth.mount_endpoint('script', '/js/oauth_client.js')
