@@ -10,8 +10,8 @@ the "Resource Owner Password Credentials Grant" as described in
 
 Requirements:
 
-    * [Flask](http://flask.pocoo.org/)
-    * [Redis](http://redis.io/)
+* [Flask](http://flask.pocoo.org/)
+* [Redis](http://redis.io/)
 
 Why using it?
 -------------
@@ -21,9 +21,9 @@ used. With Oauth, you exchange your crendentials against a token.
 
 This mechanism has several advantages:
 
-    * The client does not pass the full credentials for each request.
-    * The server does not check the username and password each time, it will 
-    only check the access token, this will reduce the database lookups.
+* The client does not pass the full credentials for each request.
+* The server does not check the username and password each time, it will 
+  only check the access token, this will reduce the database lookups.
 
 Basic Oauth uses Redis to store the sessions.
 
@@ -40,3 +40,29 @@ using the User-Agent and the client IP address. If an attacker tries to re-use
 a stolen token, he will have to connect to the same IP and using the same
 User-Agent (browser version, OS, architecture) to get access. A wrong try will
 result in destroying the session.
+
+How to use it?
+--------------
+
+      import flask
+      import basic_oauth
+      
+      
+      app = flask.Flask(__name__)
+      
+      oauth = basic_oauth.BasicOauth(app)
+      oauth.mount_endpoint('login', '/login')
+      oauth.mount_endpoint('script', '/js/oauth_client.js')
+      oauth.credentials.append(('johndoe', 'foobar42'))
+      
+      @app.route('/')
+      @oauth.require
+      def hello():
+          return 'Hello World!'
+      
+      
+      if __name__ == '__main__':
+          app.debug = True
+          app.run()
+          
+Checkout the "example" directory for a complete server/client example.
