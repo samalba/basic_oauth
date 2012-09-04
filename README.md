@@ -59,6 +59,8 @@ Create a sample WSGI app with [Flask](http://flask.pocoo.org/):
       oauth.mount_endpoint('login', '/login')
       oauth.mount_endpoint('script', '/js/oauth_client.js')
       oauth.credentials.append(('johndoe', 'foobar42'))
+      # You can declare "oauth.authenticate_handler" to plug it to your
+      # database instead of using the in-memory credentials
       
       @app.route('/')
       @oauth.require
