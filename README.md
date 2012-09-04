@@ -75,4 +75,4 @@ if __name__ == '__main__':
     app.run()
 ```
           
-Checkout the "example" directory for a complete server/client example.
+Checkout the ["example" directory](https://github.com/samalba/basic_oauth/tree/master/example) for a complete server/client example.
