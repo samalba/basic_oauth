@@ -46,29 +46,33 @@ How to use it?
 
 Install basic_oauth from PYPI:
 
-    pip install basic_oauth
+```
+pip install basic_oauth
+```
 
 Create a sample WSGI app with [Flask](http://flask.pocoo.org/):
 
-      import flask
-      import basic_oauth
-      
-      app = flask.Flask(__name__)
-      
-      oauth = basic_oauth.BasicOauth(app)
-      oauth.mount_endpoint('login', '/login')
-      oauth.mount_endpoint('script', '/js/oauth_client.js')
-      oauth.credentials.append(('johndoe', 'foobar42'))
-      # You can declare "oauth.authenticate_handler" to plug it to your
-      # database instead of using the in-memory credentials
-      
-      @app.route('/')
-      @oauth.require
-      def hello():
-          return 'Hello World!'
-      
-      if __name__ == '__main__':
-          app.debug = True
-          app.run()
+```python
+import flask
+import basic_oauth
+
+app = flask.Flask(__name__)
+
+oauth = basic_oauth.BasicOauth(app)
+oauth.mount_endpoint('login', '/login')
+oauth.mount_endpoint('script', '/js/oauth_client.js')
+oauth.credentials.append(('johndoe', 'foobar42'))
+# You can declare "oauth.authenticate_handler" to plug your own
+# database instead of using the in-memory credentials
+
+@app.route('/')
+@oauth.require
+def hello():
+    return 'Hello World!'
+
+if __name__ == '__main__':
+    app.debug = True
+    app.run()
+```
           
 Checkout the "example" directory for a complete server/client example.
