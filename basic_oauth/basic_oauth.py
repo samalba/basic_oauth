@@ -53,6 +53,9 @@ class BasicOauth(object):
         # Auth handler to abstract db calls
         # can be set in order to use a real database
         self.authenticate_handler = None
+        # In secure mode, the cookie will have the secure attribute be set only
+        # for https connections
+        self.secure = True
         self._token_ttl = token_ttl
         # Redis connection
         redis_config = redis_config or {}
@@ -116,7 +119,7 @@ class BasicOauth(object):
                 'key': 'access_token',
                 'value': access_token,
                 'max_age': self._token_ttl,
-                'secure': True
+                'secure': self.secure
                 }
         return response({
             'access_token': access_token,
