@@ -152,7 +152,7 @@ class BasicOauth(object):
                 self._redis.delete(token_key)
                 return error_response('invalid_grant')
             # Pass the user_id as first argument
-            return f(data[1], *args, **kwds)
+            return f(int(data[1]), *args, **kwds)
         return wrapper
 
     def script_endpoint(self):
