@@ -151,7 +151,8 @@ class BasicOauth(object):
                 # the session for safety
                 self._redis.delete(token_key)
                 return error_response('invalid_grant')
-            return f(*args, **kwds)
+            # Pass the user_id as first argument
+            return f(data[1], *args, **kwds)
         return wrapper
 
     def script_endpoint(self):
