@@ -14,7 +14,7 @@ oauth.credentials.append(('johndoe', 'foobar42'))
 
 @app.route('/')
 @oauth.require
-def hello():
+def hello(user_id):
     return 'Hello World!'
 
 
