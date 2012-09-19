@@ -80,6 +80,12 @@ class BasicOauth(object):
                     'view_func': self.login_endpoint,
                     'methods': ['POST']
                     },
+                'logout': {
+                    'rule': uri,
+                    'endpoint': 'oauth_logout_endpoint',
+                    'view_func': self.logout_endpoint,
+                    'methods': ['GET']
+                    },
                 'script': {
                     'rule': uri,
                     'endpoint': 'oauth_script_endpoint',
@@ -126,6 +132,17 @@ class BasicOauth(object):
             'token_type': 'bearer',
             'expires_in': self._token_ttl
             }, cookies=[cookie])
+
+    def logout_endpoint(self):
+        """ Logout """
+        req = flask.request
+        access_token = req.args.get('access_token') or \
+                req.cookies.get('access_token')
+        if not access_token:
+            return response({})
+        token_key = 'token:' + access_token
+        self._redis.delete(token_key)
+        return response({})
 
     def require(self, f):
         """ Decorator that authorizes an access token """
