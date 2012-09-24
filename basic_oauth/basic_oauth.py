@@ -168,6 +168,8 @@ class BasicOauth(object):
                 # the session for safety
                 self._redis.delete(token_key)
                 return error_response('invalid_grant')
+            # Refresh the token TTL
+            self._redis.expire(token_key, self._token_ttl)
             # Pass the user_id as first argument
             return f(int(data[1]), *args, **kwds)
         return wrapper

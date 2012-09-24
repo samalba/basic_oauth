@@ -11,6 +11,8 @@ except ImportError:
     from distutils.core import setup
 
 if sys.argv[-1] == 'publish':
+    os.systen('rm -rf *.egg-info')
+    os.systen('rm -rf dist')
     os.system('python setup.py sdist upload')
     sys.exit()
 
