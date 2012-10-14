@@ -124,7 +124,6 @@ class BasicOauth(object):
         cookie = {
                 'key': 'access_token',
                 'value': access_token,
-                'max_age': self._token_ttl,
                 'secure': self.secure
                 }
         return response({
